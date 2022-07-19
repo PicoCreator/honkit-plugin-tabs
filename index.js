@@ -1,7 +1,10 @@
+// Original Dependencies (all removed)
+//-------------------------------------------------
 // var _ = require('lodash');
 // var markdown = require('gitbook-markdown');
 
-// Global anti block collision counter
+// Added Global anti block collision counter
+//-------------------------------------------------
 var blockCount = 0;
 
 module.exports = {
@@ -26,13 +29,18 @@ module.exports = {
                 var tabContent = "<div class='tab-content'>";
                 var activeState = 'active';
 
+                // Original line
+                //-------------------------------------------------
                 // var tabIndex = 1 + _.random(1000);
 
+                // Updated line
+                //-------------------------------------------------
                 // Increment block count
                 blockCount++;
 
                 // I am guessing the Math.random()*1000 is to prevent collision from multiple blocks
                 var tabIndex = 1 + parseInt( Math.random() * 100 ) + blockCount * 1000;
+                //-------------------------------------------------
 
                 // _.forEach(block.blocks, function (b) {
                 block.blocks.forEach( function(b) {
@@ -43,8 +51,13 @@ module.exports = {
                         tabList += `<li role="presentation" class="${classData}"><a href="#${tabId}" aria-controls="${tabId}" role="tab" data-toggle="tab">${title}</a></li>`;
                         classData = "";
 
+                        // Original line
+                        //-------------------------------------------------
                         //var markup = markdown.page(b.body).content;
-                        var markup = b.body; // remove the old gitbook dependency
+
+                        // Updated line
+                        //-------------------------------------------------
+                        var markup = book.renderInline('markdown', b.body); 
 
                         tabContent += `<div role="tabpanel" class="tab-pane ${activeState}" id="${tabId}">${markup}</div>`;
                         activeState = "";

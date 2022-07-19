@@ -57,7 +57,7 @@ module.exports = {
 
                         // Updated line
                         //-------------------------------------------------
-                        var markup = this.book.renderInline('markdown', b.body); 
+                        var markup = book.renderInline('markdown', b.body); 
 
                         tabContent += `<div role="tabpanel" class="tab-pane ${activeState}" id="${tabId}">${markup}</div>`;
                         activeState = "";

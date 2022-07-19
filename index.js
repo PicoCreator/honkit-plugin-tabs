@@ -35,6 +35,9 @@ module.exports = {
 
                 // Updated line
                 //-------------------------------------------------
+                // Get the book context (used later)
+                let book = this.book;
+
                 // Increment block count
                 blockCount++;
 

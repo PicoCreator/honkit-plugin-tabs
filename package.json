@@ -13,7 +13,7 @@
         "url": "https://github.com/PicoCreator/honkit-plugin-tabs/issues"
     },
     "engines": {
-        "honkit": ">1.x.x"
+        "gitbook": ">2.x.x"
     },
     "keywords": [
         "honkit",

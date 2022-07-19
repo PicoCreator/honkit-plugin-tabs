@@ -22,7 +22,7 @@ module.exports = {
     blocks: {
         tabs: {
             blocks: ['tab','endtab'],
-            process: function (block) {
+            process: async function (block) {
                 var tabList = "<ul class='nav nav-tabs' role='tablist'>";
                 var classData = "active";
 
@@ -45,8 +45,15 @@ module.exports = {
                 var tabIndex = 1 + parseInt( Math.random() * 100 ) + blockCount * 1000;
                 //-------------------------------------------------
 
+                // Original line
+                //-------------------------------------------------
                 // _.forEach(block.blocks, function (b) {
-                block.blocks.forEach( function(b) {
+
+                // Updated line
+                //-------------------------------------------------
+                for(let i=0; i<block.blocks.length; ++i) {
+                    let b = block.blocks[i];
+
                     if(b.kwargs.title){
                         var tabId = "tab-" + tabIndex;
                         var title = b.kwargs.title || tabId;
@@ -60,14 +67,14 @@ module.exports = {
 
                         // Updated line
                         //-------------------------------------------------
-                        var markup = book.renderInline('markdown', b.body); 
+                        var markup = await book.renderInline('markdown', b.body); 
 
                         tabContent += `<div role="tabpanel" class="tab-pane ${activeState}" id="${tabId}">${markup}</div>`;
                         activeState = "";
 
                         tabIndex++;
                     }
-                })
+                } //)
                 tabList += "</ul>";
                 tabContent += "</div>";
                 return "<div class='markdown-tabs'>"+tabList + tabContent+"</div>";
